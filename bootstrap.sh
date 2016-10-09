@@ -38,8 +38,3 @@ sed -i -e "s/^HOST_ADDRESS=$/HOST_ADDRESS=$hostaddress/" \
   -e "s/^DJANGO_SECRET_KEY=$/DJANGO_SECRET_KEY=fa6beea713eb0176462c75f8afd3f44d499c73a5a874696855/" \
   -e "s/^KOBO_SUPERUSER_USERNAME=$/KOBO_SUPERUSER_USERNAME=admin/" \
   -e "s/^KOBO_SUPERUSER_PASSWORD=$/KOBO_SUPERUSER_PASSWORD=admin/" envfile.local.txt
-
-echo "Starting server"
-docker-compose up -d
-
-echo "Server should now be available at http://$hostaddress:8000"
