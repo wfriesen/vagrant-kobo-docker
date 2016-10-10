@@ -5,8 +5,17 @@ echo "Checking for required packages"
 
 dockerexists=$( which docker  | wc -l )
 if [ $dockerexists -eq 0 ]; then
-  echo "Installing docker.io"
-  apt-get install -y docker.io
+  echo "Installing docker"
+  apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+
+  if [ ! -f /etc/apt/sources.list.d/docker.list ]; then
+    echo "Adding docker repo"
+    codename=$(lsb_release -c | cut -f 2)
+    echo "deb https://apt.dockerproject.org/repo ubuntu-$codename main" > /etc/apt/sources.list.d/docker.list
+    apt-get update
+  fi
+
+  apt-get install -y docker-engine
 fi
 
 if [ ! -f /usr/local/bin/docker-compose ]; then
